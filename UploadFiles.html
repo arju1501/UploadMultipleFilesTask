@@ -1,0 +1,58 @@
+<html>
+<title>UploadFiles</title>
+<head>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var images = [];
+            var fileName;
+            $('input[type="file"]').change(function(e){
+                
+                var i_length = images.length;
+                if(i_length == 0) {
+                    for(var i=0; i < e.target.files.length; i++)
+                    {
+                        fileName = e.target.files[i].name;
+                        images[i] = fileName;
+                        console.log(images);
+                    }
+                }
+                else{
+                    for(var i=i_length; i < (i_length+e.target.files.length);)
+                    {
+                        for(var j=0; j < e.target.files.length; j++)
+                        {
+                            fileName = e.target.files[j].name;
+                            images[i] = fileName;
+                            console.log(images);
+                            i++;
+                        }
+                    }
+
+                }
+            });
+
+            $('#upload').click(function(){
+                document.getElementById('#show').innerHTML = "";
+                for(var i=0; i < images.length; i++)
+                {
+                    $('p').append(images[i],"<br />");
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+    <input type="file" multiple class="form-control-file border">
+    <br />
+    <button class="btn btn-success" id="upload">Upload</button>
+    <br />
+    <p id="show"></p>
+</div>
+</body>
+</html>
